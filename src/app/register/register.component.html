@@ -1,0 +1,81 @@
+<p>
+    Type of Item :
+        <select class="form-control" id="itemType" name ="itemType" (change)="choice($event.target.value)">
+          <option *ngFor="let Type of itemTypes" [value]="Type.id">{{Type.type}}</option>
+        </select>
+</p>
+
+<div [ngSwitch]="selection">
+<div *ngSwitchCase="1">
+<form [formGroup]="customerForm">
+    <p>First Name:
+            <input formControlName="fName" type="text" name="fName" ng-model="fName" >
+            <span *ngIf="customerForm.get('fName').touched && customerForm.get('fName').invalid">
+                The First Name is required.</span>
+    </p>
+    <p>Last Name:
+            <input formControlName="lName" type="text" name="lName" ng-model="lName" >
+            <span *ngIf="customerForm.get('lName').touched && customerForm.get('lName').invalid">
+                The Last Name is required.</span>
+    </p>    
+  <p>E-mail:
+      <input formControlName="email" type="text" name="email" ng-model="email" >
+      <span *ngIf="customerForm.get('email').touched && customerForm.get('email').invalid">
+          The E-mail is required.</span>
+  </p>
+  <p>Phone Number:
+      <input formControlName="phoneNo" type="number" name="phoneNo" ng-model="phoneNo">
+      <span *ngIf="customerForm.get('phoneNo').touched && customerForm.get('phoneNo').invalid">
+      The Phone Number is required.</span>
+  </p>
+  
+  <p><input type="button" ng-disabled="customerForm.$invalid" value="Submit" (click)="regCustomer()"></p>
+</form>
+</div>
+
+<div *ngSwitchCase="2">
+    <form [formGroup]="addDVDForm">
+  <p>No.of spaces: {{noSpaces}}</p>  
+  <p>ISBN:
+      <input formControlName="isbn" type="number" name="isbn" ng-model="isbn" >
+      <span *ngIf="addDVDForm.get('isbn').touched && addDVDForm.get('isbn').invalid">
+          The ISBN is required.</span>
+  </p>
+  <p>Title:
+      <input formControlName="title" type="text" name="title" ng-model="title">
+      <span *ngIf="addDVDForm.get('title').touched && addDVDForm.get('title').invalid">
+      The title is required.</span>
+  </p>
+  <p>Sector:
+      <input formControlName="sector" type="text" name="sector" ng-model="sector" required>
+      <span *ngIf="addDVDForm.get('sector').touched && addDVDForm.get('sector').invalid">
+      The sector is required.</span>
+  </p>
+  <p>Publication Date:
+          <input formControlName="publicationDate" type="date" name="publicationDate" ng-model="publicationDate" required>
+          <span *ngIf="addDVDForm.get('publicationDate').touched && addDVDForm.get('publicationDate').invalid">
+          The publication date is required.</span>
+  </p>
+  <p>Language:
+            <input type="text" formControlName="language" name="language" ng-model="language" required>
+            <span *ngIf="addDVDForm.get('language').touched && addDVDForm.get('language').invalid">
+            The Author is required.</span>
+            </p>
+    <p>Subtitle:
+            <input type="text" formControlName="subtitle" name="subtitle" ng-model="subtitle" >
+    </p>
+    <p>Producer name:
+            <input type="text" formControlName="producer" name="producerName" ng-model="producerName" required>
+            <span *ngIf="addDVDForm.get('producer').touched && addDVDForm.get('producer').invalid">
+            The Producer name is required.</span>
+            </p>
+    <p>Actor name:
+            <input type="text" formControlName="actor" name="actorName" ng-model="actorName" required>
+            <span *ngIf="addDVDForm.get('actor').touched && addDVDForm.get('actor').invalid">
+            The Actor name is required.</span>
+            </p>
+    <p><input type="button" ng-disabled="addDVDForm.$invalid" value="Add DVD" (click)="addDVD()"></p>
+</form>
+</div>
+</div>
+{{regResult}}
